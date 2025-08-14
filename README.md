@@ -1,4 +1,4 @@
-# au PAY In-App Wallet 仕様書・エージェントドキュメント
+# au PAY In-App Wallet 要求定義書・エージェントドキュメント
 
 au PAY統合型暗号資産ウォレットの製品仕様書とAIエージェント定義を管理するリポジトリです。
 
@@ -23,14 +23,8 @@ au PAY統合型暗号資産ウォレットの製品仕様書とAIエージェン
 │   ├── manager.md         # マネージャーエージェント
 │   ├── responsible.md     # 責任者エージェント
 │   └── ux-researcher.md   # UXリサーチャーエージェント
-├── spec/                  # 詳細仕様書
-│   ├── column.md          # コラム・補足情報
-│   └── crypto_to_auPAY_20250814.md  # 暗号資産→au PAY仕様
-└── old/                   # 過去バージョン
-    ├── spec-creator_v1.md
-    ├── spec-creator_v2.md
-    ├── spec-creator_v3.md
-    └── spec-creator_v4.md
+└── spec/                  # 詳細仕様書
+
 ```
 
 ## 🚀 使い方
