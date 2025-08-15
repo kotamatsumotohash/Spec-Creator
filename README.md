@@ -1,40 +1,62 @@
-# au PAY In-App Wallet 要求定義書・エージェントドキュメント
+# au PAY Wallet 要求定義書作成エージェント
 
-au PAY統合型暗号資産ウォレットの製品仕様書とAIエージェント定義を管理するリポジトリです。
+au PAY Wallet内の機能の要求定義書を作成するリポジトリです。
 
 ## 📖 概要
 
 このリポジトリには以下が含まれています：
 
-- **製品仕様書**: au PAY In-App Walletの詳細な仕様
+- **au PAY Wallet概要**: au PAY Walletの概要
 - **AIエージェント定義**: 開発・マネジメント・UX調査などの役割別エージェント
-- **技術仕様**: 暗号資産からau PAY残高チャージの仕様など
+- **コマンド**: AIエージェントを動かして要求定義書を作成するコマンド
 
 ## 🗂️ ファイル構成
 
 ```
-├── CLAUDE.md              # メイン製品仕様書（Claude Code用プロジェクト設定）
-├── README.md              # このファイル
+├── CLAUDE.md              # au PAY Wallet概要（Claude Code起動時に自動読み込み）
+├── README.md              # 本ファイル
 ├── .claude/               # Claude Code設定
 │   └── commands/
-│       └── spec-creator_v5.md  # 要求定義書作成コマンド
+│       └── spec-creator_v5.md  # 要求定義書作成コマンド定義
 ├── agents/                # AIエージェント定義
 │   ├── developer.md       # 開発者エージェント
 │   ├── manager.md         # マネージャーエージェント
 │   ├── responsible.md     # 責任者エージェント
 │   └── ux-researcher.md   # UXリサーチャーエージェント
-└── spec/                  # 詳細仕様書
+└── spec/                  # 作成した要求定義書
 
 ```
 
-## 🚀 使い方
+### 重要なファイルの説明
 
-### 1. リポジトリのクローン（初心者向け）
+**CLAUDE.md**：
+- Claude Codeが起動時に自動的に読み込む製品仕様書
+- au PAY Walletの概要、機能要件、技術仕様が英語で記載
+- AIエージェントがこの内容を基に要求定義書を作成
 
-**Git初心者の方**：
+**.claude/commands/spec-creator_v5.md**：
+- カスタムコマンド `/spec-creator_v5` の定義ファイル
+- 4つのAIエージェント（responsible.md, ux-researcher.md, developer.md, manager.md）を順次呼び出すワークフローを定義
+- `agents/` フォルダ内のエージェント定義ファイルを参照して動作
+
+**agents/ フォルダ**：
+- 各AIエージェントの役割、専門性、出力形式が定義
+- コマンドファイルから参照され、専門的なレビューと要求定義書作成を実行
+
+## 🚀 セットアップ
+
+### 1. リポジトリのクローン
+
+**方法A: Gitを使う場合**：
 
 1. GitHubアカウントを作成（未作成の場合）
-2. 以下のコマンドでリポジトリをダウンロード：
+2. Gitをインストール：
+   - **Windows**: [Git for Windows](https://gitforwindows.org/)をダウンロード・インストール
+   - **Mac**: 
+     - Homebrewがある場合: `brew install git`
+     - Homebrewがない場合: [Git公式サイト](https://git-scm.com/download/mac)からインストーラーをダウンロード
+   - **Linux**: `sudo apt install git`（Ubuntu/Debian）または `sudo yum install git`（CentOS/RHEL）
+3. 以下のコマンドでリポジトリをダウンロード：
 
 ```bash
 # このリポジトリをローカルにダウンロード
@@ -44,16 +66,27 @@ git clone https://github.com/kotamatsumotohash/au-pay-wallet-spec.git
 cd au-pay-wallet-spec
 ```
 
-### 2. Claude Codeで開く（推奨）
+**方法B: Gitなしの場合**：
+
+1. [リポジトリページ](https://github.com/kotamatsumotohash/au-pay-wallet-spec)にアクセス
+2. 緑の「Code」ボタンをクリック
+3. 「Download ZIP」を選択してファイルをダウンロード
+4. ZIPファイルを解凍
+5. 解凍したフォルダに移動
+
+**注意**: ZIP形式でダウンロードした場合、変更を元のリポジトリに反映するにはGitの知識が必要になります。継続的に使用する場合は方法Aを推奨します。
+
+### 2. Claude Codeで開く
 
 **Claude Code初心者の方**：
 
 1. Claude Codeをインストール：
 ```bash
-# macOSの場合
+# macOSでHomebrewがある場合
 brew install claude-code
 
-# その他のインストール方法：https://docs.anthropic.com/en/docs/claude-code
+# macOSでHomebrewがない場合、またはその他のOS
+インストール方法：https://docs.anthropic.com/en/docs/claude-code
 ```
 
 2. このプロジェクトを開く：
@@ -62,34 +95,12 @@ brew install claude-code
 claude
 ```
 
-3. Claude Codeが起動したら、以下のコマンドが使えます：
+3. Claude Codeが起動したら、以下のコマンドなどが使えます：
    - `/help` - ヘルプを表示
    - `/read CLAUDE.md` - メイン仕様書を読む
    - `/search キーワード` - ファイル内検索
    - `/spec-creator_v5` - 新機能の要求定義書を作成
 
-### 3. ファイルの編集・更新
-
-**基本的なGitワークフロー**：
-
-```bash
-# 1. 最新版を取得
-git pull origin main
-
-# 2. ファイルを編集（エディタで編集）
-
-# 3. 変更を確認
-git status
-
-# 4. 変更をステージング
-git add .
-
-# 5. コミット（変更を記録）
-git commit -m "変更内容の説明"
-
-# 6. リモートリポジトリに送信
-git push origin main
-```
 
 ## ⚙️ 新機能の要求定義書作成
 
@@ -127,7 +138,7 @@ au PAYウォレットに関する新機能の要求定義書を作成できま�
 
 ### 作成される成果物
 
-- **ファイル名**: `./spec/<機能名>_要件定義_<YYYYMMDD>.md`
+- **ファイル名**: `./spec/<機能名>_<YYYYMMDD>.md`
 - **内容**: 
   - 概要・ビジネスゴール・KPI
   - 想定ユーザーフロー・UI仕様
@@ -173,29 +184,17 @@ au PAYウォレットに関する新機能の要求定義書を作成できま�
 
 ## 📋 主要な仕様項目
 
-### 製品概要
-- **コンセプト**: Pontaポイントで暗号資産を購入できるau PAY統合ウォレット
+### au PAY Wallet概要
+- **コンセプト**: Pontaポイントで暗号資産を購入できるau PAY Wallet
 - **ターゲット**: 暗号資産初心者、au PAYユーザー
 - **キー機能**: ポイント交換、マルチチェーン対応、WalletConnect
 
 ### 技術仕様
 - **対応チェーン**: Ethereum, Polygon, Base, Aptos, Oasys
 - **対応トークン**: CoinGecko対応FT、ERC721/ERC1155 NFT
-- **セキュリティ**: KDDI基準、Safe Site フィルタリング
+- **セキュリティ**: KDDI基準、安全サイトフィルタリング
 
 詳細は [`CLAUDE.md`](./CLAUDE.md) をご確認ください。
-
-## 🤝 貢献方法
-
-1. このリポジトリをフォーク
-2. 新しいブランチを作成：`git checkout -b feature/新機能名`
-3. 変更をコミット：`git commit -m "新機能: 説明"`
-4. ブランチをプッシュ：`git push origin feature/新機能名`
-5. プルリクエストを作成
-
-## 📝 ライセンス
-
-このプロジェクトは内部仕様書のため、社内利用に限定されます。
 
 ## 📞 サポート
 
