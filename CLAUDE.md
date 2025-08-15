@@ -30,14 +30,24 @@ au PAY In-App Wallet: A wallet integrated with au PAY that enables users to purc
 
 ---
 
+## Development Setup
+
+### Claude Code Configuration
+
+- `CLAUDE.md`: Central memory and specification file for the project, tracking key decisions, hypotheses, and product overview.
+- `.claude/command`: Configuration file that dynamically loads agent scripts from the `agents/` folder, enabling modular and extensible development workflow.
+  - The system reads command configurations from this file, allowing flexible agent management and script execution.
+
+---
+
 ## User Journey
 
 ### Primary Flow
 
-1. Enter via au PAY ecosystem landing page; see promotions like “Crypto with Points” or “Campaigns.”
+1. Enter via au PAY ecosystem landing page; see promotions like "Crypto with Points" or "Campaigns."
 2. Agree to terms + email registration + passcode setup → account created in 30 seconds.
 3. View campaign banners on the home screen.
-4. Tap “Exchange with Ponta Points”, enter amount, confirm transaction, purchase BTC.
+4. Tap "Exchange with Ponta Points", enter amount, confirm transaction, purchase BTC.
 5. Check portfolio value on the home screen.
 6. Re-check portfolio value after several days.
 

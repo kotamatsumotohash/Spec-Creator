@@ -17,7 +17,7 @@ au PAY Wallet内の機能の要求定義書を作成するリポジトリです�
 ├── README.md              # 本ファイル
 ├── .claude/               # Claude Code設定
 │   └── commands/
-│       └── spec-creator_v5.md  # 要求定義書作成コマンド定義
+│       └── spec-creator.md  # 要求定義書作成コマンド定義
 ├── agents/                # AIエージェント定義
 │   ├── developer.md       # 開発者エージェント
 │   ├── manager.md         # マネージャーエージェント
@@ -34,8 +34,8 @@ au PAY Wallet内の機能の要求定義書を作成するリポジトリです�
 - au PAY Walletの概要、機能要件、技術仕様が英語で記載
 - AIエージェントがこの内容を基に要求定義書を作成
 
-**.claude/commands/spec-creator_v5.md**：
-- カスタムコマンド `/spec-creator_v5` の定義ファイル
+**.claude/commands/spec-creator.md**：
+- カスタムコマンド `/spec-creator` の定義ファイル
 - 4つのAIエージェント（responsible.md, ux-researcher.md, developer.md, manager.md）を順次呼び出すワークフローを定義
 - `agents/` フォルダ内のエージェント定義ファイルを参照して動作
 
@@ -99,22 +99,22 @@ claude
    - `/help` - ヘルプを表示
    - `/read CLAUDE.md` - メイン仕様書を読む
    - `/search キーワード` - ファイル内検索
-   - `/spec-creator_v5` - 新機能の要求定義書を作成
+   - `/spec-creator` - 新機能の要求定義書を作成
 
 
 ## ⚙️ 新機能の要求定義書作成
 
-### `/spec-creator_v5` コマンドの使い方
+### `/spec-creator` コマンドの使い方
 
 au PAYウォレットに関する新機能の要求定義書を作成できます。Claude Code内で以下のコマンドを実行してください：
 
 ```bash
-/spec-creator_v5
+/spec-creator
 ```
 
 ### 作成プロセス
 
-`/spec-creator_v5`は4つのAIエージェントが連携して高品質な要求定義書を作成します：
+`/spec-creator`は4つのAIエージェントが連携して高品質な要求定義書を作成します：
 
 1. **責任者エージェント（Responsible）**
    - ユーザーから要求をヒアリング
@@ -150,7 +150,7 @@ au PAYウォレットに関する新機能の要求定義書を作成できま�
 
 ```bash
 # Claude Code起動後
-/spec-creator_v5
+/spec-creator
 
 # エージェントが以下を質問します：
 # 1. 機能の概要
@@ -207,6 +207,6 @@ au PAYウォレットに関する新機能の要求定義書を作成できま�
 **初心者Tips** 💡
 - `CLAUDE.md`がメインファイルです。まずここから読み始めましょう
 - Claude Codeを使えば、自然言語でファイルの内容を質問できます
-- 新機能の要求定義書は`/spec-creator_v5`コマンドで簡単に作成できます
+- 新機能の要求定義書は`/spec-creator`コマンドで簡単に作成できます
 - 変更前は必ず`git pull`で最新版を取得しましょう
 - エージェントが順次レビューするので、高品質な仕様書が自動生成されます
